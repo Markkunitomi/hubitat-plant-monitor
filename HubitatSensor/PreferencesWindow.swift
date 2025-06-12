@@ -15,7 +15,8 @@ struct PreferencesView: View {
     let onSave: () -> Void
     
     var body: some View {
-        VStack(spacing: 20) {
+        ScrollView {
+            VStack(spacing: 20) {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Hubitat Configuration")
                     .font(.headline)
@@ -135,7 +136,7 @@ struct PreferencesView: View {
             }
         }
         .padding(20)
-        .frame(width: 500, height: sensors.isEmpty ? 400 : 600)
+        .frame(minWidth: 500, minHeight: 400)
         .onAppear {
             loadSettings()
         }

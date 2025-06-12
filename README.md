@@ -6,12 +6,12 @@ A macOS menu bar application that displays moisture sensor data from your Hubita
 
 ### Core Functionality
 - **Real-time monitoring**: Connects to Hubitat Maker API to fetch moisture sensor readings
-- **Smart status indicators**: Menu bar icon changes color based on overall plant health
-  - 🟢 Green: All plants healthy
-  - 🟡 Yellow: Some plants need attention  
-  - 🔴 Red: Plants critically dry
-  - ⚪ Gray: Unknown status or not configured
-- **Detailed sensor view**: Dropdown menu shows individual sensor information
+- **Smart status indicators**: Menu bar icon changes symbol based on overall plant health
+  - 🍃 Leaf: All plants healthy
+  - ⚠️ Triangle: Some plants need attention  
+  - 💧 Drop: Plants critically dry
+  - ❓ Question mark: Unknown status or not configured
+- **Detailed sensor view**: Dropdown menu shows individual sensor information with submenus
 - **Auto-refresh**: Configurable refresh intervals (5-120 minutes)
 - **Background operation**: Runs silently in the menu bar
 
@@ -83,19 +83,20 @@ Download the latest release from the GitHub releases page (when available).
 ## Usage
 
 ### Menu Bar Icon
-- **Click**: Refresh sensor data immediately
-- **Icon color**: Indicates overall plant health status
-- **Hover**: Shows tooltip with current status
+- **Click**: Opens dropdown menu
+- **Icon symbol**: Indicates overall plant health status (leaf/triangle/drop/question)
+- Icons follow system appearance (black in light mode, white in dark mode)
 
 ### Dropdown Menu
-- **Sensor list**: Shows all detected moisture sensors
-- **Sensor details**: Click a sensor to see:
+- **Refresh Now**: Manual refresh of all sensor data
+- **Sensor list**: Shows all detected moisture sensors with status icons
+- **Sensor submenus**: Click a sensor to see submenu with:
   - Current moisture percentage
-  - Battery level (if available)
+  - Battery level (if available) 
+  - Status description
   - Last update time
-  - Current status
-- **Quick actions**: 
-  - "Mark as Just Watered" for plants that need attention
+- **Quick actions** (for plants needing attention):
+  - "Mark as Just Watered" to temporarily override alerts
   - "Clear Watered Status" to remove the watered flag
 
 ### Preferences

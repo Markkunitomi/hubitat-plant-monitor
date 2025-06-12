@@ -43,7 +43,7 @@ class HubitatAPI {
         }
         
         let baseURL = hubIP.hasPrefix("http") ? hubIP : "http://\(hubIP)"
-        guard let url = URL(string: "\(baseURL)/apps/api/\(apiToken)/\(endpoint)") else {
+        guard let url = URL(string: "\(baseURL)/apps/api/242/\(endpoint)?access_token=\(apiToken)") else {
             return nil
         }
         

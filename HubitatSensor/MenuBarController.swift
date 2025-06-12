@@ -316,7 +316,7 @@ class MenuBarController: NSObject {
         alert.alertStyle = .warning
         alert.addButton(withTitle: "OK")
         
-        if error is AppError && (error as! AppError) == .authenticationError {
+        if let appError = error as? AppError, appError == .authenticationError {
             alert.addButton(withTitle: "Preferences")
         }
         

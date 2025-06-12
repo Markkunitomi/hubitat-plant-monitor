@@ -170,7 +170,7 @@ struct AppSettings {
     }
 }
 
-enum AppError: LocalizedError {
+enum AppError: LocalizedError, Equatable {
     case networkError(String)
     case apiError(String)
     case authenticationError
@@ -193,9 +193,3 @@ enum AppError: LocalizedError {
     }
 }
 
-extension NSColor {
-    static let systemGreen = NSColor.systemGreen
-    static let systemYellow = NSColor.systemYellow
-    static let systemRed = NSColor.systemRed
-    static let systemGray = NSColor.systemGray
-}

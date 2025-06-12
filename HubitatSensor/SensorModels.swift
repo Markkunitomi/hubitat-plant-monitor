@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 
 struct HubitatDevice: Codable, Identifiable {
     let id: Int

@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2025-01-12
+
+### Fixed
+- **API Connection**: Fixed Hubitat Maker API endpoint format to use correct URL structure (`/apps/api/[APP_ID]/devices?access_token=token`)
+- **Data Parsing**: Fixed device ID parsing to handle string IDs returned by Hubitat API
+- **Attribute Reading**: Fixed moisture value parsing to handle both string and numeric attribute values
+- **Sensor Detection**: Added support for Ecowitt RF sensors that use "humidity" attribute for soil moisture
+- **UI**: Removed empty window that appeared on app launch - now properly menu bar-only
+
+### Technical
+- Updated API client to use query parameter format for access tokens
+- Added robust JSON parsing for mixed data types (string/numeric IDs and values)
+- Enhanced attribute detection to support both "moisture" and "humidity" attributes
+- Improved error handling for network responses
+
 ## [1.0.0] - 2025-01-12
 
 ### Added

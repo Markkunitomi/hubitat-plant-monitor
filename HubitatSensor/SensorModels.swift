@@ -11,6 +11,29 @@ struct HubitatDevice: Codable, Identifiable {
     var displayName: String {
         return label ?? name
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        // Handle id as either string or int
+        if let idString = try? container.decode(String.self, forKey: .id) {
+            guard let idInt = Int(idString) else {
+                throw DecodingError.dataCorruptedError(forKey: .id, in: container, debugDescription: "Cannot convert id string to int")
+            }
+            self.id = idInt
+        } else {
+            self.id = try container.decode(Int.self, forKey: .id)
+        }
+        
+        self.name = try container.decode(String.self, forKey: .name)
+        self.label = try container.decodeIfPresent(String.self, forKey: .label)
+        self.type = try container.decode(String.self, forKey: .type)
+        self.deviceNetworkId = try container.decodeIfPresent(String.self, forKey: .deviceNetworkId)
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, name, label, type, deviceNetworkId
+    }
 }
 
 struct DeviceAttribute: Codable {

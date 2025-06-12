@@ -58,8 +58,9 @@ Download the latest release from the GitHub releases page (when available).
 
 3. **Get your API details**:
    - Click on the **Maker API** app you just created
-   - Note your **Access Token** and **Cloud Endpoint URL**
+   - Note your **Access Token** and **App ID** (shown in URL as `/apps/api/[APP_ID]/`)
    - Your hub IP is typically shown in the URL bar
+   - Example URL format: `http://192.168.1.100/apps/api/242/devices?access_token=your-token`
 
 ### 2. Configure the Menu Bar App
 
@@ -114,7 +115,14 @@ The app automatically detects devices containing these keywords:
 - "moisture" in device name or type
 - "soil" in device type
 
-If your sensors aren't detected, check they're included in your Maker API app configuration.
+**Supported sensor types:**
+- Ecowitt RF Sensors (uses "humidity" attribute for soil moisture)
+- Generic moisture sensors (uses "moisture" attribute)
+
+If your sensors aren't detected, ensure they're:
+1. Added to your Maker API app configuration
+2. Named with "moisture" or "soil" keywords
+3. Reporting moisture data via "moisture" or "humidity" attributes
 
 ### Menu Bar Icon Not Appearing
 - Check macOS menu bar settings in System Preferences

@@ -103,7 +103,16 @@ class HubitatAPI {
                 let attributes = attributesArray.compactMap { attributeDict -> DeviceAttribute? in
                     guard let name = attributeDict["name"] as? String else { return nil }
                     
-                    let currentValue = attributeDict["currentValue"] as? String
+                    // Handle currentValue as either string or number
+                    let currentValue: String?
+                    if let stringValue = attributeDict["currentValue"] as? String {
+                        currentValue = stringValue
+                    } else if let numberValue = attributeDict["currentValue"] as? NSNumber {
+                        currentValue = numberValue.stringValue
+                    } else {
+                        currentValue = nil
+                    }
+                    
                     let dataType = attributeDict["dataType"] as? String
                     let unit = attributeDict["unit"] as? String
                     
@@ -144,7 +153,10 @@ class HubitatAPI {
             do {
                 let attributes = try await fetchDeviceAttributes(deviceId: device.id)
                 
-                let moistureAttribute = attributes.first { $0.name.lowercased().contains("moisture") }
+                let moistureAttribute = attributes.first { attr in
+                    let name = attr.name.lowercased()
+                    return name.contains("moisture") || name == "humidity"
+                }
                 let batteryAttribute = attributes.first { $0.name.lowercased() == "battery" }
                 
                 let moistureLevel: Double?

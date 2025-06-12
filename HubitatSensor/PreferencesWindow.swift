@@ -134,6 +134,7 @@ struct PreferencesView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
+            }
         }
         .padding(20)
         .frame(minWidth: 500, minHeight: 400)

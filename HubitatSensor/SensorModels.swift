@@ -85,9 +85,9 @@ enum MoistureStatus: CaseIterable {
     var color: NSColor {
         switch self {
         case .healthy, .justWatered:
-            return .systemGreen
+            return .white
         case .needsAttention:
-            return .systemYellow
+            return .systemOrange
         case .critical:
             return .systemRed
         case .unknown:

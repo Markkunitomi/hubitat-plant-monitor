@@ -46,10 +46,10 @@ class MenuBarController: NSObject {
             switch status {
             case .healthy, .justWatered:
                 symbolName = "leaf.fill"
-                tintColor = .systemGreen
+                tintColor = .white
             case .needsAttention:
                 symbolName = "exclamationmark.triangle.fill"
-                tintColor = .systemYellow
+                tintColor = .systemOrange
             case .critical:
                 symbolName = "drop.fill"
                 tintColor = .systemRed

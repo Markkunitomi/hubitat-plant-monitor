@@ -46,10 +46,10 @@ class MenuBarController: NSObject {
             switch status {
             case .healthy, .justWatered:
                 symbolName = "leaf.fill"
-                tintColor = .white
+                tintColor = .systemGreen
             case .needsAttention:
                 symbolName = "drop.fill"
-                tintColor = .white
+                tintColor = .systemBlue
             case .critical:
                 symbolName = "exclamationmark.triangle.fill"
                 tintColor = .systemOrange
@@ -59,12 +59,21 @@ class MenuBarController: NSObject {
             }
             
             let config = NSImage.SymbolConfiguration(pointSize: 16, weight: .regular)
-            let image = NSImage(systemSymbolName: symbolName, accessibilityDescription: status.description)?
-                .withSymbolConfiguration(config)
+            guard let image = NSImage(systemSymbolName: symbolName, accessibilityDescription: status.description)?
+                .withSymbolConfiguration(config) else { return }
             
-            button.image = image
-            button.image?.isTemplate = false
+            // Create a colored version of the image
+            let coloredImage = NSImage(size: image.size)
+            coloredImage.lockFocus()
+            tintColor.set()
+            image.draw(at: .zero, from: NSRect(origin: .zero, size: image.size), operation: .sourceOver, fraction: 1.0)
+            coloredImage.unlockFocus()
             
+            // Set the image properties to ensure it displays in color
+            coloredImage.isTemplate = false
+            button.image = coloredImage
+            
+            // Also set the content tint color as a fallback for newer systems
             if #available(macOS 11.0, *) {
                 button.contentTintColor = tintColor
             }

@@ -48,11 +48,11 @@ class MenuBarController: NSObject {
                 symbolName = "leaf.fill"
                 tintColor = .white
             case .needsAttention:
+                symbolName = "drop.fill"
+                tintColor = .white
+            case .critical:
                 symbolName = "exclamationmark.triangle.fill"
                 tintColor = .systemOrange
-            case .critical:
-                symbolName = "drop.fill"
-                tintColor = .systemRed
             case .unknown:
                 symbolName = "questionmark.circle.fill"
                 tintColor = .systemGray
@@ -63,7 +63,7 @@ class MenuBarController: NSObject {
                 .withSymbolConfiguration(config)
             
             button.image = image
-            button.image?.isTemplate = true
+            button.image?.isTemplate = false
             
             if #available(macOS 11.0, *) {
                 button.contentTintColor = tintColor

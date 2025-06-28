@@ -87,9 +87,9 @@ enum MoistureStatus: CaseIterable {
         case .healthy, .justWatered:
             return .white
         case .needsAttention:
-            return .systemOrange
+            return .white
         case .critical:
-            return .systemRed
+            return .systemOrange
         case .unknown:
             return .systemGray
         }
@@ -100,9 +100,9 @@ enum MoistureStatus: CaseIterable {
         case .healthy:
             return "leaf.fill"
         case .needsAttention:
-            return "exclamationmark.triangle.fill"
-        case .critical:
             return "drop.fill"
+        case .critical:
+            return "exclamationmark.triangle.fill"
         case .unknown:
             return "questionmark.circle.fill"
         case .justWatered:
@@ -130,8 +130,8 @@ struct AppSettings {
     var hubIP: String = ""
     var apiToken: String = ""
     var refreshInterval: TimeInterval = 1800 // 30 minutes
-    var healthyThreshold: Double = 40.0
-    var criticalThreshold: Double = 20.0
+    var healthyThreshold: Double = 20.0
+    var criticalThreshold: Double = 10.0
     var customNames: [Int: String] = [:]
     var justWateredSensors: Set<Int> = []
     var justWateredTimestamps: [Int: Date] = [:]
@@ -148,11 +148,11 @@ struct AppSettings {
         }
         settings.healthyThreshold = userDefaults.double(forKey: "healthyThreshold")
         if settings.healthyThreshold == 0 {
-            settings.healthyThreshold = 40.0
+            settings.healthyThreshold = 20.0
         }
         settings.criticalThreshold = userDefaults.double(forKey: "criticalThreshold")
         if settings.criticalThreshold == 0 {
-            settings.criticalThreshold = 20.0
+            settings.criticalThreshold = 10.0
         }
         
         if let customNamesData = userDefaults.data(forKey: "customNames"),
